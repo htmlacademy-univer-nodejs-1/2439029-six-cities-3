@@ -42,7 +42,7 @@ export class TSVOfferGenerator implements OfferGenerator {
     const countPeople = generateRandomValue(MIN_COUNT_PEOPlE, MAX_COUNT_PEOPLE);
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE);
     const facilities = getRandomItems([Facilities.Air_conditioning, Facilities.Baby_seat, Facilities.Fridge,
-    Facilities.Towels, Facilities.Breakfast, Facilities.Laptop_friendly_workspace, Facilities.Washer]);
+    Facilities.Towels, Facilities.Breakfast, Facilities.Laptop_friendly_workspace, Facilities.Washer]).join('/');
     const userName = getRandomItem(this.mockData.userName);
     const userAvatar = getRandomItem(this.mockData.userAvatar);
     const userEmail = getRandomItem(this.mockData.userEmail);
