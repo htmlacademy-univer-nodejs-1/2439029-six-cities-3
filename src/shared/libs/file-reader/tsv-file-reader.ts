@@ -24,7 +24,7 @@ export class TSVFileReader implements FileReader {
       .map((line) => line.split('\t'))
       .map(([name, description, date, city, previewImg, images, IsPremium,
               IsFavourites, rating, housing, countRooms, countPeople, price,
-              facilities, author, countComments, coordinates]) => ({
+              facilities, userName, userAvatar, userEmail, userPassword, userType, countComments, coordinates]) => ({
         name: name,
         description: description,
         date: new Date(date),
@@ -43,7 +43,7 @@ export class TSVFileReader implements FileReader {
         countPeople: countPeople as unknown as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
         price: Number.parseInt(price, 10),
         facilities: facilities as Facilities,
-        author: author as unknown as User,
+        author: { name: userName, avatar: userAvatar, email:userEmail, password: userPassword, userType: userType } as User,
         countComments: Number.parseInt(countComments, 10),
         coordinates: coordinates.split('/') as unknown as Coordinates,
       }));
