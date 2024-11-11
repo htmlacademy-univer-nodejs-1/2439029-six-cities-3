@@ -36,9 +36,16 @@ export function createOffer(offerData: string): Offer {
         countRooms: countRooms as unknown as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8,
         countPeople: countPeople as unknown as 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10,
         price: Number.parseInt(price, 10),
-        facilities: facilities.split('/').map((item) => item as Facilities),
+        facilities: facilities.split('/').map((item) => getFacilities(item)),
         author: user,
         countComments: Number.parseInt(countComments, 10),
         coordinates: coordinatesObj
     };
+}
+
+function getFacilities(name: string): Facilities {
+  const offer =  {
+    name: name
+  }
+  return offer
 }
