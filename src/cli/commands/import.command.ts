@@ -70,11 +70,12 @@ export class ImportCommand implements Command {
     }, this.salt);
 
     for (const { name } of offer.facilities) {
-      const existCategory = await this.facilitiesService.findByFacilityNameOrCreate(name, { name });
-      facilities.push(existCategory.id);
+      const existFacility = await this.facilitiesService.findByFacilityNameOrCreate(name, { name });
+      facilities.push(existFacility.id);
     }
 
     await this.offerService.create({
+      facilities,
       name: offer.name,
       description: offer.description,
       date: offer.date,
@@ -88,7 +89,6 @@ export class ImportCommand implements Command {
       countRooms: offer.countRooms,
       countPeople: offer.countPeople,
       price: offer.price,
-      facilities: facilities,
       author: user.id,
       countComments: offer.countComments,
       coordinates: `${offer.coordinates.latitude}/${offer.coordinates.longitude}`

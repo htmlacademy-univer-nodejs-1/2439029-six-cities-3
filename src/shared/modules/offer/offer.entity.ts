@@ -10,15 +10,13 @@ import {FacilitiesEntity} from "../facilities/index.js";
 const {prop, modelOptions} = typegoose;
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export interface OfferEntity extends defaultClasses.Base {
-}
+export interface OfferEntity extends defaultClasses.Base {}
 
 @modelOptions({
   schemaOptions: {
     collection: 'offers'
   }
 })
-
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   @prop({

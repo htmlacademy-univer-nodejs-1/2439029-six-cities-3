@@ -9,6 +9,7 @@ export interface FacilitiesEntity extends defaultClasses.Base {}
     collection: 'facilities'
   }
 })
+
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class FacilitiesEntity extends defaultClasses.TimeStamps implements Facilities {
   @prop({required: true, trim: true})

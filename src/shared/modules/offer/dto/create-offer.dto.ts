@@ -1,6 +1,5 @@
 import {User} from '../../../types/index.js';
 import {Housing} from '../../../types/index.js';
-import {Facilities} from '../../../types/index.js';
 import {City} from '../../../types/index.js';
 
 export default class CreateOfferDto {
@@ -21,7 +20,7 @@ export default class CreateOfferDto {
   countRooms!: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   countPeople!: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
   price!: number;
-  facilities!: string[];
+  facilities: string[];
   author!: User;
   countComments!: number;
   coordinates!: string;
