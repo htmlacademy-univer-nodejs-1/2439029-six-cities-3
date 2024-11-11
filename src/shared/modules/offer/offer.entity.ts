@@ -80,6 +80,7 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   })
   public price!: number;
 
+//i don`t know why it does not work
   @prop({
     ref: FacilitiesEntity,
     required: true,
