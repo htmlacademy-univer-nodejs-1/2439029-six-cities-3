@@ -81,6 +81,20 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   public price!: number;
 
 //i don`t know why it does not work
+//   TSError: ⨯ Unable to compile TypeScript:
+//     src/shared/modules/offer/offer.entity.ts:89:10 - error TS2416: Property 'facilities' in type 'OfferEntity' is not assignable to the same property in base type 'Offer'.
+//   Type 'Ref<FacilitiesEntity>[]' is not assignable to type 'Facilities[]'.
+//   Type 'Ref<FacilitiesEntity>' is not assignable to type 'Facilities'.
+//   Property 'name' is missing in type 'ObjectId' but required in type 'Facilities'.
+//
+//   89   public facilities!: Ref<FacilitiesEntity>[];
+// ~~~~~~~~~~
+//
+//   src/shared/types/facilities.type.ts:2:3
+//   2   name: string;
+// ~~~~
+//   'name' is declared here.
+
   @prop({
     ref: FacilitiesEntity,
     required: true,
