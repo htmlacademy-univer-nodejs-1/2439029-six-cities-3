@@ -34,15 +34,5 @@ export class RestApplication {
     this.logger.info('Init database…');
     await this._initDb();
     this.logger.info('Init database completed');
-    const user = new UserModel({
-      email: 'test@email.ru',
-      avatar: 'keks.jpg',
-      name: '2',
-      password: 'Unknown',
-      userType: 'pro'
-    });
-
-    const error = user.validateSync();
-    console.log(error);
   }
 }
