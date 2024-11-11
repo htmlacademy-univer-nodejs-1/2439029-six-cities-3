@@ -1,6 +1,10 @@
 import { User } from '../../types/index.js';
 import {defaultClasses, getModelForClass, prop} from '@typegoose/typegoose';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
+export interface UserEntity extends defaultClasses.Base {}
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({ required: false, default: "avatar.jpg", match: [/\.(jpg|png)$/, 'Avatar image format jpg or png'],})
   avatar?: string;
