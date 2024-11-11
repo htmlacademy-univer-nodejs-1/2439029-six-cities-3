@@ -1,7 +1,7 @@
 import { User } from '../../types/index.js';
-import {getModelForClass, prop} from '@typegoose/typegoose';
+import {defaultClasses, getModelForClass, prop} from '@typegoose/typegoose';
 
-export class UserEntity implements User {
+export class UserEntity extends defaultClasses.TimeStamps implements User {
   @prop({ required: false, default: "avatar.jpg", match: [/\.(jpg|png)$/, 'Avatar image format jpg or png'],})
   avatar?: string;
 
