@@ -12,7 +12,7 @@ export interface UserEntity extends defaultClasses.Base {}
 })
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class UserEntity extends defaultClasses.TimeStamps {
-  @prop({ required: false, default: "avatar.jpg", match: [/\.(jpg|png|jpeg)$/, 'Avatar image format jpg or png'],})
+  @prop({ required: false, default: "avatar.jpg", match: [/\.(jpg|png)$/, 'Avatar image format jpg or png'],})
   public avatar?: string;
 
   @prop({ unique: true, match: [/^([\w-\\.]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Email is incorrect'], required: true,
@@ -23,12 +23,12 @@ export class UserEntity extends defaultClasses.TimeStamps {
     default: '' })
   public name: string;
 
-  @prop({required: true, minlength: [6, 'Min length for name is 6'], maxlength: [1024, 'Max length for name is 1024'],
+  @prop({required: true, minlength: [6, 'Min length for name is 6'], maxlength: [12, 'Max length for name is 12'],
     default: '' })
   private password?: string;
 
   @prop({required: true, enum: ['normal', 'pro'],})
-  public userType: string; // "normal" | "pro";
+  public userType: string;
 
   constructor(userData: User) {
     super();

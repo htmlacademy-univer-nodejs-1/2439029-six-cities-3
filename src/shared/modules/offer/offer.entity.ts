@@ -29,7 +29,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({
     trim: true,
     required: true,
-    minlength: [0, 'Min length for description is 0'],
+    minlength: [20, 'Min length for description is 20'],
     maxlength: [1024, 'Min length for description is 1024']
   })
   public description!: string;
@@ -50,10 +50,10 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   })
   public images!: string[];
 
-  @prop({required: false})
+  @prop({required: true})
   public isPremium!: boolean;
 
-  @prop({required: false})
+  @prop({required: true})
   public isFavourites!: boolean;
 
   @prop({required: true})
@@ -79,21 +79,6 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   })
   public price!: number;
 
-//i don`t know why it does not work
-//   TSError: ⨯ Unable to compile TypeScript:
-//     src/shared/modules/offer/offer.entity.ts:89:10 - error TS2416: Property 'facilities' in type 'OfferEntity' is not assignable to the same property in base type 'Offer'.
-//   Type 'Ref<FacilitiesEntity>[]' is not assignable to type 'Facilities[]'.
-//   Type 'Ref<FacilitiesEntity>' is not assignable to type 'Facilities'.
-//   Property 'name' is missing in type 'ObjectId' but required in type 'Facilities'.
-//
-//   89   public facilities!: Ref<FacilitiesEntity>[];
-// ~~~~~~~~~~
-//
-//   src/shared/types/facility.type.ts:2:3
-//   2   name: string;
-// ~~~~
-//   'name' is declared here.
-
   @prop({
     ref: FacilitiesEntity,
     required: true,
@@ -102,7 +87,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   })
   public facilities!: Ref<FacilitiesEntity>[];
 
-  @prop({required: true, ref: UserEntity,})
+  @prop({required: true, ref: UserEntity})
   public author!: User;
 
   @prop({default: 0})
