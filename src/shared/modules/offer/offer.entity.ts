@@ -1,5 +1,4 @@
 import typegoose, {defaultClasses, getModelForClass, Ref} from '@typegoose/typegoose';
-import {Offer} from '../../types/index.js';
 import {City} from '../../types/index.js';
 import {Housing} from '../../types/index.js';
 import {UserEntity} from '../user/index.js';
@@ -18,7 +17,7 @@ export interface OfferEntity extends defaultClasses.Base {}
   }
 })
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
+export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({
     trim: true,
     required: true,
@@ -30,7 +29,7 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   @prop({
     trim: true,
     required: true,
-    minlength: [20, 'Min length for description is 20'],
+    minlength: [0, 'Min length for description is 0'],
     maxlength: [1024, 'Min length for description is 1024']
   })
   public description!: string;
@@ -51,11 +50,11 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   })
   public images!: string[];
 
-  @prop({required: true})
-  public flagIsPremium!: boolean;
+  @prop({required: false})
+  public isPremium!: boolean;
 
-  @prop({required: true})
-  public flagIsFavourites!: boolean;
+  @prop({required: false})
+  public isFavourites!: boolean;
 
   @prop({required: true})
   public rating!: 1 | 1.1 | 1.2 | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | 1.9 |
@@ -90,7 +89,7 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
 //   89   public facilities!: Ref<FacilitiesEntity>[];
 // ~~~~~~~~~~
 //
-//   src/shared/types/facilities.type.ts:2:3
+//   src/shared/types/facility.type.ts:2:3
 //   2   name: string;
 // ~~~~
 //   'name' is declared here.

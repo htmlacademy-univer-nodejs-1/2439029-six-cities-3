@@ -1,4 +1,4 @@
-import {Facilities} from './facilities.type.js';
+import {Facility} from './facility.type.js';
 import {User} from './user.type.js';
 import {City} from './city.enum.js';
 import {Coordinates} from './coordinates.type.js';
@@ -22,7 +22,7 @@ export type Offer = {
     countRooms: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     countPeople: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
     price: number;
-    facilities: Facilities[];
+    facilities: Facility[];
     author: User;
     countComments: number;
     coordinates: Coordinates;

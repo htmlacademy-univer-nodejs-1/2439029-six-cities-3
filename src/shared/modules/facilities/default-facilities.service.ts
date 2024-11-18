@@ -5,7 +5,7 @@ import { Logger } from '../../libs/logger/index.js';
 import { DocumentType, types } from '@typegoose/typegoose';
 import { FacilitiesEntity } from './facilities.entity.js';
 import { CreateFacilitiesDto } from './dto/create-facilities.dto.js';
-import {Promise} from "mongoose";
+// import {Promise} from "mongoose";
 
 export class DefaultFacilitiesService implements FacilitiesService {
   constructor(
@@ -27,7 +27,7 @@ export class DefaultFacilitiesService implements FacilitiesService {
     return this.categoryModel.findOne({name: categoryName}).exec();
   }
 
-  findByFacilityNameOrCreate(categoryName: string, dto: CreateFacilitiesDto): Promise<DocumentType<FacilitiesEntity>> {
+  async findByFacilityNameOrCreate(categoryName: string, dto: CreateFacilitiesDto): Promise<DocumentType<FacilitiesEntity>> {
     const existedFacilities = await this.findByFacilityName(categoryName);
 
     if (existedFacilities) {
