@@ -1,0 +1,150 @@
+openapi: 3.1.0
+info:
+  title: API сервер для проекта «Шесть городов».
+  description: API сервер для проекта «Шесть городов».
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+tags:
+  - name: offers
+    description: Действия с объявлениями.
+  - name: facilities
+    description: Действия с удобствами.
+  - name: comments
+    description: Действия с комментариями.
+  - name: users
+    description: Действия с пользователем.
+
+paths:
+  /offer:
+    post:
+      tags:
+        - offers
+      summary: Создание нового объявления.
+      description: Создает новое объявление.
+
+      requestBody:
+        description: Метод создает новое объявление.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createOffers'
+        required: true
+
+      responses:
+        "201":
+          description: Новое объявление создано.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+
+        "400":
+          description: Невалидные значения для полей.
+        "409":
+          description: Пользователь с таким email уже существует.
+
+
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: Авторизация пользователя
+      description: Авторизует пользователя на основе логина и пароля
+
+    get:
+      tags:
+        - users
+      summary: Проверка состояния пользователя
+      description: Возвращает информацию по авторизованному пользователю
+
+  /users/{userId}/avatar:
+    post:
+      tags:
+        - users
+      summary: Загрузить изображение аватара
+      description: Загружает изображение аватара пользователя. Изображение
+        аватара должно быть в формате `png` или `jpg`.
+
+
+components:
+  schemas:
+    createOffers:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Название"
+
+        description:
+          type: string
+          example: "Описание объяаления"
+
+        date:
+          type: string
+          example: '2024.03.03'
+
+        city:
+          type: string
+          example: 'Paris'
+
+        previewImg:
+          type: string
+          example: "preview.jpg"
+
+        images:
+          type: string
+          example: [ "apartment1.jpg","apartment2.jpg" ]
+
+        isPremium:
+          type: boolean
+
+        isFavourites:
+          type: boolean
+
+        rating:
+          type: number
+          example: 3.5
+
+        typeHousing:
+          type: string
+          example: 'House'
+
+        countRooms:
+          type: number
+          example: 3
+
+        countPeople:
+          type: number
+          example: 3
+
+        price:
+          type: number
+          example: 666
+
+        facilities:
+          type: string
+          example: ['Breakfast']
+
+        author:
+          type: string
+          example: "Анастасия Белоусова"
+
+        countComments:
+          type: number
+          example: 1
+
+        coordinates:
+          type: string
+          example: 48.85661/2.351499
+    offer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "6329c3d6a04ab1061c6425ea"
+
+        name:
+          type: string
+          example: "Название"
