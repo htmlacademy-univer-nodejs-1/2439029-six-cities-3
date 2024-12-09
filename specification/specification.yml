@@ -16,6 +16,7 @@ tags:
   - name: users
     description: Действия с пользователем.
 
+
 paths:
   /offer:
     post:
@@ -79,7 +80,7 @@ components:
 
         description:
           type: string
-          example: "Описание объяаления"
+          example: "Описание объявления"
 
         date:
           type: string
@@ -148,3 +149,6 @@ components:
         name:
           type: string
           example: "Название"
+        description:
+          type: string
+          example: "Описание"
