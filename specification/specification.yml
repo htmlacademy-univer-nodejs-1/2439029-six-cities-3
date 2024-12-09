@@ -155,3 +155,43 @@ components:
         date:
           type: string
           example: '2024.03.03'
+        city:
+          type: string
+          example: 'Paris'
+        previewImg:
+          type: string
+          example: "preview.jpg"
+        images:
+          type: string
+          example: [ "apartment1.jpg","apartment2.jpg" ]
+        isPremium:
+          type: boolean
+        isFavourites:
+          type: boolean
+        rating:
+          type: number
+          example: 3.5
+        typeHousing:
+          type: string
+          example: 'House'
+        countRooms:
+          type: number
+          example: 3
+        countPeople:
+          type: number
+          example: 3
+        price:
+          type: number
+          example: 666
+        facilities:
+          type: string
+          example: [ 'Breakfast' ]
+        author:
+          type: string
+          example: "Анастасия Белоусова"
+        countComments:
+          type: number
+          example: 1
+        coordinates:
+          type: string
+          example: 48.85661/2.351499
