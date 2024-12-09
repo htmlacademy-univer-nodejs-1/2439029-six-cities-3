@@ -1,5 +1,4 @@
 import typegoose, {defaultClasses, getModelForClass, Ref} from '@typegoose/typegoose';
-import {Offer} from '../../types/index.js';
 import {City} from '../../types/index.js';
 import {Housing} from '../../types/index.js';
 import {UserEntity} from '../user/index.js';
@@ -18,7 +17,7 @@ export interface OfferEntity extends defaultClasses.Base {}
   }
 })
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
+export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({
     trim: true,
     required: true,
@@ -52,10 +51,10 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   public images!: string[];
 
   @prop({required: true})
-  public flagIsPremium!: boolean;
+  public isPremium!: boolean;
 
   @prop({required: true})
-  public flagIsFavourites!: boolean;
+  public isFavourites!: boolean;
 
   @prop({required: true})
   public rating!: 1 | 1.1 | 1.2 | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | 1.9 |
@@ -80,21 +79,6 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   })
   public price!: number;
 
-//i don`t know why it does not work
-//   TSError: ⨯ Unable to compile TypeScript:
-//     src/shared/modules/offer/offer.entity.ts:89:10 - error TS2416: Property 'facilities' in type 'OfferEntity' is not assignable to the same property in base type 'Offer'.
-//   Type 'Ref<FacilitiesEntity>[]' is not assignable to type 'Facilities[]'.
-//   Type 'Ref<FacilitiesEntity>' is not assignable to type 'Facilities'.
-//   Property 'name' is missing in type 'ObjectId' but required in type 'Facilities'.
-//
-//   89   public facilities!: Ref<FacilitiesEntity>[];
-// ~~~~~~~~~~
-//
-//   src/shared/types/facilities.type.ts:2:3
-//   2   name: string;
-// ~~~~
-//   'name' is declared here.
-
   @prop({
     ref: FacilitiesEntity,
     required: true,
@@ -103,7 +87,7 @@ export class OfferEntity extends defaultClasses.TimeStamps implements Offer {
   })
   public facilities!: Ref<FacilitiesEntity>[];
 
-  @prop({required: true, ref: UserEntity,})
+  @prop({required: true, ref: UserEntity})
   public author!: User;
 
   @prop({default: 0})

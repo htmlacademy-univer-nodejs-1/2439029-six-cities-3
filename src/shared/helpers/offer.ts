@@ -1,4 +1,4 @@
-import {City, Coordinates, Facilities, Housing, Offer} from '../types/index.js';
+import {City, Coordinates, Facility, Housing, Offer} from '../types/index.js';
 
 export function createOffer(offerData: string): Offer {
     const [
@@ -43,7 +43,7 @@ export function createOffer(offerData: string): Offer {
     };
 }
 
-function getFacilities(name: string): Facilities {
+function getFacilities(name: string): Facility {
   const offer =  {
     name: name
   }

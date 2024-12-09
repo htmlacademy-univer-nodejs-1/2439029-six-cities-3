@@ -12,7 +12,7 @@
       "Аренда у нас станет лучшим ващим решением, поторопись изменить жизнь)",
       "Аренда дома петфрендли, будем рады вам и вашим питомцам, мяу",
       "Комфортное проживание для парочек, устройте романтический вечер со второй половинкой <3",
-      "Вы удивитесь!"
+      "Вы удивитесь! Лучший дом для аренды."
     ],
     "previewImg": [
       "logo1.jpg",
@@ -36,11 +36,11 @@
       "Bober"
     ],
     "userAvatar": [
-      "avatar1.jpeg",
-      "avatar2.jpeg",
-      "avatar3.jpeg",
-      "avatar4.jpeg",
-      "avatar5.jpeg"
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
     ],
     "userEmail": [
       "hihi@mail.ru",
@@ -52,7 +52,7 @@
     "userPassword": [
       "1234567890",
       "qwertyuiop",
-      "1111",
+      "111111",
       "password",
       "not found"
     ]

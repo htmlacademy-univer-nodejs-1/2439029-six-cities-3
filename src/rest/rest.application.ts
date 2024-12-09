@@ -1,11 +1,9 @@
-
 import { inject, injectable } from 'inversify';
 import { Logger } from '../shared/libs/logger/index.js';
 import { Config, RestSchema } from '../shared/libs/config/index.js';
 import { Component } from '../shared/types/index.js';
 import { DatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
-import {UserModel} from "../shared/modules/user/index.js";
 
 @injectable()
 export class RestApplication {
@@ -23,6 +21,7 @@ export class RestApplication {
       this.config.get('DB_PORT'),
       this.config.get('DB_NAME'),
     );
+    console.log(mongoUri)
 
     return this.databaseClient.connect(mongoUri);
   }

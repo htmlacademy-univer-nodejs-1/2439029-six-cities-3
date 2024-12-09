@@ -11,7 +11,7 @@ export interface UserEntity extends defaultClasses.Base {}
   }
 })
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class UserEntity extends defaultClasses.TimeStamps implements User {
+export class UserEntity extends defaultClasses.TimeStamps {
   @prop({ required: false, default: "avatar.jpg", match: [/\.(jpg|png)$/, 'Avatar image format jpg or png'],})
   public avatar?: string;
 
@@ -28,7 +28,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   private password?: string;
 
   @prop({required: true, enum: ['normal', 'pro'],})
-  public userType: "normal" | "pro";
+  public userType: string;
 
   constructor(userData: User) {
     super();

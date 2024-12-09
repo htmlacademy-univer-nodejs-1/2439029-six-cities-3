@@ -5,6 +5,7 @@ import {Command} from './command.interface.js';
 import {MockServerData} from '../../shared/types/index.js';
 import {TSVOfferGenerator} from '../../shared/libs/offer-generator/index.js';
 
+// npm run ts ./src/main.cli.ts -- --generate 100 mockdata.ts http://localhost:3123/api
 export class GenerateCommand implements Command {
     private initialData: MockServerData;
 

@@ -11,6 +11,7 @@ import DefaultOfferService from "../../shared/modules/offer/default-offer.servic
 import {DefaultUserService, UserModel} from "../../shared/modules/user/index.js";
 import {Offer} from "../../shared/types/index.js";
 
+// npm run ts ./src/main.cli.ts -- --import mocks/mock-data.ts admin test localhost six-cities utka
 export class ImportCommand implements Command {
     private userService: UserService;
     private facilitiesService: FacilitiesService;
@@ -82,8 +83,8 @@ export class ImportCommand implements Command {
       city: offer.city,
       previewImg: offer.previewImg,
       images: offer.images,
-      flagIsPremium: offer.isPremium,
-      flagIsFavourites: offer.isFavourites,
+      isPremium: offer.isPremium,
+      isFavourites: offer.isFavourites,
       rating: offer.rating,
       housing: offer.housing,
       countRooms: offer.countRooms,
