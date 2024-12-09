@@ -152,3 +152,6 @@ components:
         description:
           type: string
           example: "Описание"
+        date:
+          type: string
+          example: '2024.03.03'
