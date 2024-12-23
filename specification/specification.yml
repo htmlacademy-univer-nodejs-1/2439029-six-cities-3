@@ -212,7 +212,7 @@ paths:
         400:
           description: Введенные данные не прошли валидацию
 
-  /user/login:
+  /user/register:
     get:
       tags:
         - users
@@ -223,14 +223,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/userLogin'
+              $ref: '#/components/schemas/userRegister'
       responses:
         201:
           description: Пользователь авторизован
         400:
           description: Данные невалидны
-        401:
-          description: Пользователь не авторизован
+        "409":
+          description: Пользователь с таким email уже существует.
 
   /user/logout:
     get:
@@ -470,7 +470,7 @@ components:
       email:
         type: string
         example: "Анастасия Белоусова"
-    userLogin:
+    userRegister:
       email:
         type: string
         example: "Анастасия Белоусова"
