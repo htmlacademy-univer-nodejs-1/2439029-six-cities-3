@@ -61,7 +61,7 @@ paths:
         401:
           description: Пользователь не авторизован
       description: Редактирование существующего предложения
-
+  /offer/{offerId}:
     delete:
       tags:
         - offers
@@ -96,17 +96,11 @@ paths:
                   items:
                     $ref: '#/components/schemas/offerWithoutDetails'
 
-  /offers/details:
+  /offers/{offerId}/details:
     get:
       tags:
         - offers
       summary: Детальная информация по объявлению
-      requestBody:
-        description: Метод отдает детальныю информацию по объявлению.
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/byId'
       responses:
         200:
           description: Детальная информация по предложению успешно получена
@@ -116,17 +110,11 @@ paths:
                 $ref: '#/components/schemas/offer'
 
 #Комментарии
-  /comments?count=50:
+  /comments/{offerId}?count=50:
     get:
       tags:
         - comments
       summary: Список комментариев для объявления
-      requestBody:
-        description: Метод отдает комментарии у объявления
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/byId'
       responses:
         200:
           description: Список комментариев для объявления успешно получен
@@ -152,19 +140,71 @@ paths:
         401:
           description: Пользователь не авторизован
 
-  /users/login:
+#Пользователь
+  /users/create:
     post:
       tags:
         - users
       summary: Авторизация пользователя
       description: Авторизует пользователя на основе логина и пароля
+      requestBody:
+        description: Метод отдает комментарии у объявления
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+      responses:
+        201:
+          description: Успешное создание пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/userData'
+        400:
+          description: Введенные данные не прошли валидацию
 
+  /user/login:
+    get:
+      tags:
+        - users
+      summary: Вход в закрытую часть приложения
+      description: Вход в закрытую часть приложения
+      requestBody:
+        description: Метод отдает комментарии у объявления
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userLogin'
+      responses:
+        201:
+          description: Пользователь авторизован
+        400:
+          description: Данные невалидны
+        401:
+          description: Пользователь не авторизован
+
+  /user/logout:
+    get:
+      tags:
+        - users
+      summary: Выход из закрытой части приложения
+      description: Выход из закрытой части приложения
+      responses:
+        201:
+          description: Пользователь успешно вышел
+        401:
+          description: Пользователь не авторизован
+  /user:
     get:
       tags:
         - users
       summary: Проверка состояния пользователя
-      description: Возвращает информацию по авторизованному пользователю
-
+      description: Проверка состояния пользователя
+      responses:
+        201:
+          description: Пользователь авторизован
+        401:
+          description: Пользователь не авторизован
   /users/{userId}/avatar:
     post:
       tags:
@@ -172,8 +212,11 @@ paths:
       summary: Загрузить изображение аватара
       description: Загружает изображение аватара пользователя. Изображение
         аватара должно быть в формате `png` или `jpg`.
-
-
+      responses:
+        201:
+          description: Аватар успешно загружен
+        400:
+          description: Аватар некорректого формата
 
 components:
   schemas:
@@ -358,3 +401,30 @@ components:
           type: string
           example: "6329c3d6a04ab1061c6425ea"
 
+    user:
+      name:
+        type: string
+        example: "Анастасия Белоусова"
+      email:
+        type: string
+        example: "Анастасия Белоусова"
+      password:
+        type: string
+        example: "abacaba"
+    userData:
+      id:
+        type: string
+        example: "6329c3d6a04ab1061c6425ea"
+      name:
+        type: string
+        example: "Анастасия Белоусова"
+      email:
+        type: string
+        example: "Анастасия Белоусова"
+    userLogin:
+      email:
+        type: string
+        example: "Анастасия Белоусова"
+      password:
+        type: string
+        example: "abacaba"
