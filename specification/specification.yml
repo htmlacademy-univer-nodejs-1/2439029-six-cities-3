@@ -24,15 +24,13 @@ paths:
         - offers
       summary: Создание нового объявления.
       description: Создает новое объявление.
-
       requestBody:
         description: Метод создает новое объявление.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createOffers'
+              $ref: '#/components/schemas/createOffer'
         required: true
-
       responses:
         "201":
           description: Новое объявление создано.
@@ -40,11 +38,83 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/offer'
-
         "400":
           description: Невалидные значения для полей.
-        "409":
-          description: Пользователь с таким email уже существует.
+        "401":
+          description: Пользователь не авторизован
+    put:
+      tags:
+        - offers
+      summary: Редактирование объявления
+      requestBody:
+        description: Метод редактирует объявление.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/offer'
+        required: true
+      responses:
+        200:
+          description: Объявление успешно отредактировано
+        400:
+          description: Пользователь может редактировать только свои объявления
+        401:
+          description: Пользователь не авторизован
+      description: Редактирование существующего предложения
+
+    delete:
+      tags:
+        - offers
+      summary: Удаление объявления по аренде
+      requestBody:
+        description: Метод удаляет объявление.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/offerById'
+      responses:
+        200:
+          description: Предложение успешно удалено
+        400:
+          description: Пользователь может удалять только свои предложения
+        401:
+          description: Пользователь не авторизован
+      description: Удаление существующего объявления
+
+  /offers?countRequests=60:
+      get:
+        tags:
+          - offers
+        summary: Список объявлений по аренде
+        responses:
+          200:
+            description: Успешно получен список предложений
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/offerWithoutDetails'
+
+  /offers/details:
+    get:
+      tags:
+        - offers
+      summary: Детальная информация по объявлению
+      requestBody:
+        description: Метод отдает детальныю информацию по объявлению.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/offerById'
+      responses:
+        200:
+          description: Детальная информация по предложению успешно получена
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+
 
 
   /users/login:
@@ -69,83 +139,72 @@ paths:
         аватара должно быть в формате `png` или `jpg`.
 
 
+
 components:
   schemas:
-    createOffers:
+    createOffer:
       type: object
       properties:
         name:
           type: string
           example: "Название"
-
         description:
           type: string
           example: "Описание объявления"
-
         date:
           type: string
           example: '2024.03.03'
-
         city:
           type: string
           example: 'Paris'
-
         previewImg:
           type: string
           example: "preview.jpg"
-
         images:
-          type: string
+          type: array
+          items:
+              type: string
           example: [ "apartment1.jpg","apartment2.jpg" ]
-
         isPremium:
           type: boolean
-
         isFavourites:
           type: boolean
-
         rating:
           type: number
           example: 3.5
-
         typeHousing:
           type: string
           example: 'House'
-
         countRooms:
           type: number
           example: 3
-
         countPeople:
           type: number
           example: 3
-
         price:
           type: number
           example: 666
-
         facilities:
-          type: string
+          type: array
+          items:
+            type: string
           example: ['Breakfast']
-
         author:
           type: string
           example: "Анастасия Белоусова"
-
         countComments:
           type: number
           example: 1
-
         coordinates:
           type: string
           example: 48.85661/2.351499
+
     offer:
       type: object
       properties:
         id:
           type: string
           example: "6329c3d6a04ab1061c6425ea"
-
         name:
           type: string
           example: "Название"
@@ -162,7 +221,9 @@ components:
           type: string
           example: "preview.jpg"
         images:
-          type: string
+          type: array
+          items:
+            type: string
           example: [ "apartment1.jpg","apartment2.jpg" ]
         isPremium:
           type: boolean
@@ -184,7 +245,9 @@ components:
           type: number
           example: 666
         facilities:
-          type: string
+          type: array
+          items:
+            type: string
           example: [ 'Breakfast' ]
         author:
           type: string
@@ -195,3 +258,45 @@ components:
         coordinates:
           type: string
           example: 48.85661/2.351499
+
+    offerById:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "6329c3d6a04ab1061c6425ea"
+
+    offerWithoutDetails:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "6329c3d6a04ab1061c6425ea"
+        price:
+          type: number
+          example: 666
+        name:
+          type: string
+          example: "Название"
+        typeHousing:
+          type: string
+          example: 'House'
+        isFavourites:
+          type: boolean
+        date:
+          type: string
+          example: '2024.03.03'
+        city:
+          type: string
+          example: 'Paris'
+        previewImg:
+          type: string
+          example: "preview.jpg"
+        isPremium:
+          type: boolean
+        rating:
+          type: number
+          example: 3.5
+        countComments:
+          type: number
+          example: 1
