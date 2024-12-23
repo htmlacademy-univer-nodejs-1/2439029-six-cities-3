@@ -71,7 +71,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/offerById'
+              $ref: '#/components/schemas/byId'
       responses:
         200:
           description: Предложение успешно удалено
@@ -106,7 +106,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/offerById'
+              $ref: '#/components/schemas/byId'
       responses:
         200:
           description: Детальная информация по предложению успешно получена
@@ -115,7 +115,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/offer'
 
-
+#Комментарии
+  /comments?count=50:
+    get:
+      tags:
+        - comments
+      summary: Список комментариев для объявления
+      requestBody:
+        description: Метод отдает комментарии у объявления
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/byId'
+      responses:
+        200:
+          description: Список комментариев для объявления успешно получен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comment'
+    post:
+      tags:
+        - comments
+      summary: Добавление комментария
+      requestBody:
+        description: Метод отдает комментарии у объявления
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/comment'
+      responses:
+        201:
+          description: Успешное добавление комментария
+        400:
+          description: Введенные данные не прошли валидацию
+        401:
+          description: Пользователь не авторизован
 
   /users/login:
     post:
@@ -259,7 +294,7 @@ components:
           type: string
           example: 48.85661/2.351499
 
-    offerById:
+    byId:
       type: object
       properties:
         id:
@@ -300,3 +335,26 @@ components:
         countComments:
           type: number
           example: 1
+
+    comment:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "6329c3d6a04ab1061c6425ea"
+        offerId:
+          type: string
+          example: "6329c3d6a04ab1061c6425ea"
+        text:
+          type: string
+          example: "мяу"
+        createdAt:
+          type: string
+          example: '2024.03.03'
+        rating:
+          type: number
+          example: 3.5
+        authorId:
+          type: string
+          example: "6329c3d6a04ab1061c6425ea"
+
