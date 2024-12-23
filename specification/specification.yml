@@ -9,13 +9,10 @@ info:
 tags:
   - name: offers
     description: Действия с объявлениями.
-  - name: facilities
-    description: Действия с удобствами.
   - name: comments
     description: Действия с комментариями.
   - name: users
     description: Действия с пользователем.
-
 
 paths:
   /offer:
@@ -108,6 +105,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/offer'
+
+  /offers/premium/{city}:
+    get:
+      tags:
+        - offers
+      summary: Премиальные предложения для города
+      responses:
+        200:
+          description: Успешно получен список премиальных предложений
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/offer'
+
+  /offers/favorites:
+    get:
+      tags:
+        - offers
+      summary: Список избранных предложений
+      responses:
+        200:
+          description: Список избранных предложений
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/offer'
+        401:
+          description: Пользователь не авторизован
+  /offers/favorites/{offerId}:
+    post:
+      tags:
+        - offers
+      summary: Добавление объявления в избранное
+      responses:
+        200:
+          description: Успешно добавлено объявлеие в избранное
+        401:
+          description: Пользователь не авторизован
+    delete:
+      tags:
+        - offers
+      summary: Удаление объявления из избранного
+      responses:
+        200:
+          description: Успешно удалено объявлеие в избранного
+        401:
+          description: Пользователь не авторизован
+
 
 #Комментарии
   /comments/{offerId}?count=50:
