@@ -21,6 +21,10 @@
       "logo4.jpg",
       "logo5.jpg"
     ],
+    "coordinates": {
+      "latitude": [2.4444, 3.4444, 5.6666],
+      "longitude": [8.4444, 4.4444, 56.6666]
+    },
     "images": [
       "room1.jpg",
       "room2.jpg",
@@ -28,33 +32,28 @@
       "room4.jpg",
       "room5.jpg"
       ],
-    "userName": [
-      "Cat",
-      "Dog",
-      "Anna",
-      "Kelvin",
-      "Bober"
-    ],
-    "userAvatar": [
-      "avatar1.jpg",
-      "avatar2.jpg",
-      "avatar3.jpg",
-      "avatar4.jpg",
-      "avatar5.jpg"
-    ],
-    "userEmail": [
-      "hihi@mail.ru",
-      "test@gmail.com",
-      "i_love_cats@mail.com",
-      "1986@gmail.com",
-      "lady@urfu.me"
-    ],
-    "userPassword": [
-      "1234567890",
-      "qwertyuiop",
-      "111111",
-      "password",
-      "not found"
-    ]
+    "users": {
+      "usernames": [
+        "Cat",
+        "Dog",
+        "Anna",
+        "Kelvin",
+        "Bober"
+      ],
+      "avatars": [
+        "avatar1.jpg",
+        "avatar2.jpg",
+        "avatar3.jpg",
+        "avatar4.jpg",
+        "avatar5.jpg"
+      ],
+      "emails": [
+        "hihi@mail.ru",
+        "test@gmail.com",
+        "i_love_cats@mail.com",
+        "1986@gmail.com",
+        "lady@urfu.me"
+      ]
+    }
   }
 }

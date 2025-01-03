@@ -1,34 +1,48 @@
-import { User } from '../../types/index.js';
-import {defaultClasses, getModelForClass, prop, modelOptions} from '@typegoose/typegoose';
-import {createSHA256} from "../../helpers/index.js";
+import typegoose, {defaultClasses, getModelForClass, Ref} from '@typegoose/typegoose';
+import {User, UserTypeEnum} from '../../types/index.js';
+import {OfferEntity} from '../offer/index.js';
+import {createSHA256} from '../../helpers/index.js';
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export interface UserEntity extends defaultClasses.Base {}
+const {prop, modelOptions} = typegoose;
+
+export interface UserEntity extends defaultClasses.Base {
+}
 
 @modelOptions({
   schemaOptions: {
     collection: 'users'
   }
 })
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class UserEntity extends defaultClasses.TimeStamps {
-  @prop({ required: false, default: "avatar.jpg", match: [/\.(jpg|png)$/, 'Avatar image format jpg or png'],})
-  public avatar?: string;
-
-  @prop({ unique: true, match: [/^([\w-\\.]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Email is incorrect'], required: true,
-    default: '' })
+export class UserEntity extends defaultClasses.TimeStamps implements User {
+  @prop({type: () => String, unique: true, required: true})
   public email: string;
 
-  @prop({required: true, minlength: [1, 'Min length for name is 1'], maxlength: [15, 'Max length for name is 15'],
-    default: '' })
+  @prop({type: () => String, required: false, default: '', match: [/.*\.(?:jpg|png)/, 'Avatar must be jpg or png']})
+  public avatar?: string;
+
+  @prop({
+    type: () => String,
+    required: true,
+    minlength: [1, 'Min length for username is 1'],
+    maxlength: [15, 'Max length for username is 15']
+  })
   public name: string;
 
-  @prop({required: true, minlength: [6, 'Min length for name is 6'], maxlength: [12, 'Max length for name is 12'],
-    default: '' })
-  private password?: string;
+  @prop({
+    type: () => String,
+    required: true,
+    enum: UserTypeEnum
+  })
+  public userType: UserTypeEnum;
 
-  @prop({required: true, enum: ['normal', 'pro'],})
-  public userType: string;
+  @prop({ required: true, ref: 'OfferEntity', default: [] })
+  public isFavorite!: Ref<OfferEntity>[];
+
+  @prop({
+    type: () => String,
+    required: true
+  })
+  private password?: string;
 
   constructor(userData: User) {
     super();
@@ -45,6 +59,11 @@ export class UserEntity extends defaultClasses.TimeStamps {
 
   public getPassword() {
     return this.password;
+  }
+
+  public verifyPassword(password: string, salt: string) {
+    const hashPassword = createSHA256(password, salt);
+    return hashPassword === this.password;
   }
 }
 
