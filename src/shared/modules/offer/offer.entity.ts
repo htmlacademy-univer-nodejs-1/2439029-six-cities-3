@@ -1,6 +1,6 @@
 import typegoose, { defaultClasses, getModelForClass, mongoose, Ref, Severity } from '@typegoose/typegoose';
 import { UserEntity } from '../user/index.js';
-import {City, Coordinates, Facility, Housing} from "../../types/index.js";
+import {City, Coordinates, Facility, Housing} from '../../types/index.js';
 
 const {prop, modelOptions} = typegoose;
 

@@ -10,7 +10,7 @@ import {
   Min,
   MinLength
 } from 'class-validator';
-import {City, Coordinates, Facility, Housing} from "../../../types/index.js";
+import {City, Coordinates, Facility, Housing} from '../../../types/index.js';
 
 export class UpdateOfferDto {
   @IsOptional()

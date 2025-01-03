@@ -5,9 +5,9 @@ import { Component } from '../shared/types/index.js';
 import { DatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
 import express, {Express} from 'express';
-import {ControllerInterface} from "../shared/controller/index.js";
-import {AuthenticateMiddleware} from "../shared/libs/middleware/index.js";
-import {ExceptionFilter} from "../shared/libs/http/index.js";
+import {ControllerInterface} from '../shared/controller/index.js';
+import {AuthenticateMiddleware} from '../shared/libs/middleware/index.js';
+import {ExceptionFilter} from '../shared/libs/http/index.js';
 
 @injectable()
 export class RestApplication {

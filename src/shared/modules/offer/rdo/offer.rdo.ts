@@ -1,60 +1,60 @@
 import {Expose, Type} from 'class-transformer';
-import {City, Coordinates, Facility, Housing, User} from "../../../types/index.js";
-import {UserRdo} from "../../user/rdo/user.rdo.js";
+import {City, Coordinates, Facility, Housing, User} from '../../../types/index.js';
+import {UserRdo} from '../../user/rdo/user.rdo.js';
 
 export class OfferRdo {
   @Expose()
   public id!: string;
 
   @Expose()
-  name!: string;
+    name!: string;
 
   @Expose({ name: 'createdAt'})
-  date!: Date;
+    date!: Date;
 
   @Expose()
-  description!: string;
+    description!: string;
 
   @Expose()
-  city!: City;
+    city!: City;
 
   @Expose()
-  previewImg!: string;
+    previewImg!: string;
 
   @Expose()
-  images!: string[];
+    images!: string[];
 
   @Expose()
-  isPremium!: boolean;
+    isPremium!: boolean;
 
   @Expose()
-  isFavourites!: boolean;
+    isFavourites!: boolean;
 
   @Expose()
-  rating!: number;
+    rating!: number;
 
   @Expose()
-  housing!: Housing;
+    housing!: Housing;
 
   @Expose()
-  price!: number;
+    price!: number;
 
   @Expose()
-  countComments!: number;
+    countComments!: number;
 
   @Expose()
-  countRooms!: number;
+    countRooms!: number;
 
   @Expose()
-  countPeople!: number;
+    countPeople!: number;
 
   @Expose()
-  facilities!: Facility[];
+    facilities!: Facility[];
 
   @Expose({name: 'userId'})
   @Type(() => UserRdo)
-  author!: User;
+    author!: User;
 
   @Expose()
-  coordinates!: Coordinates;
+    coordinates!: Coordinates;
 }

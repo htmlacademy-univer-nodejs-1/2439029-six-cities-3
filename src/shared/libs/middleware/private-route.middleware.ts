@@ -1,5 +1,5 @@
-import {Middleware} from "./middleware.interface.js";
-import {HttpError} from "../http/index.js";
+import {Middleware} from './middleware.interface.js';
+import {HttpError} from '../http/index.js';
 import { StatusCodes } from 'http-status-codes';
 import { NextFunction, Request, Response } from 'express';
 

@@ -1,6 +1,6 @@
 import { injectable } from 'inversify';
 import {Config} from './config.interface.js';
-import {RestSchema} from "./rest.schema.js";
+import {RestSchema} from './rest.schema.js';
 
 @injectable()
 export class MockRestConfig implements Config<RestSchema> {

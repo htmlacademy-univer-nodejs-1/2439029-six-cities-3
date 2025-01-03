@@ -27,7 +27,7 @@ export class MongoDatabaseClient implements DatabaseClient {
     let attempt = 0;
 
     while (attempt < RETRY_COUNT) {
-      console.log('uri', uri)
+      console.log('uri', uri);
       try {
         return await mongoose.connect(uri);
       } catch (error) {

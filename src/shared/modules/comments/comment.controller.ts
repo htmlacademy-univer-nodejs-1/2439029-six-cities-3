@@ -1,15 +1,15 @@
 import {Request, Response} from 'express';
 import {inject, injectable} from 'inversify';
-import {Controller} from "../../controller/index.js";
-import {Component, HttpMethod, ParamsOffer} from "../../types/index.js";
-import {Logger} from "../../libs/logger/index.js";
-import {CommentService} from "./comment-service.interface.js";
-import {OfferService} from "../offer/index.js";
-import {Config, RestSchema} from "../../libs/config/index.js";
-import {DocumentExistsMiddleware, PrivateRouteMiddleware, ValidateDtoMiddleware} from "../../libs/middleware/index.js";
-import {fillDTO} from "../../helpers/index.js";
-import {CreateCommentDto} from "./dto/create-comment.dto.js";
-import {CommentRdo} from "./rdo/comment.rdo.js";
+import {Controller} from '../../controller/index.js';
+import {Component, HttpMethod, ParamsOffer} from '../../types/index.js';
+import {Logger} from '../../libs/logger/index.js';
+import {CommentService} from './comment-service.interface.js';
+import {OfferService} from '../offer/index.js';
+import {Config, RestSchema} from '../../libs/config/index.js';
+import {DocumentExistsMiddleware, PrivateRouteMiddleware, ValidateDtoMiddleware} from '../../libs/middleware/index.js';
+import {fillDTO} from '../../helpers/index.js';
+import {CreateCommentDto} from './dto/create-comment.dto.js';
+import {CommentRdo} from './rdo/comment.rdo.js';
 
 @injectable()
 export class CommentController extends Controller {

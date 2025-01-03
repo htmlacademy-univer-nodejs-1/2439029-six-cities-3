@@ -1,10 +1,10 @@
-import {Component, SortType} from "../../types/index.js";
-import {CommentEntity} from "./comment.entity.js";
-import {CreateCommentDto} from "./dto/create-comment.dto.js";
+import {Component, SortType} from '../../types/index.js';
+import {CommentEntity} from './comment.entity.js';
+import {CreateCommentDto} from './dto/create-comment.dto.js';
 import {inject, injectable} from 'inversify';
 import {DocumentType, types} from '@typegoose/typegoose';
-import {OfferService} from "../offer/index.js";
-import {CommentService} from "./comment-service.interface.js";
+import {OfferService} from '../offer/index.js';
+import {CommentService} from './comment-service.interface.js';
 
 const COMMENTS_COUNT = 50;
 @injectable()

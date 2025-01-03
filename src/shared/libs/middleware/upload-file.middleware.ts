@@ -1,4 +1,4 @@
-import {Middleware} from "./middleware.interface.js";
+import {Middleware} from './middleware.interface.js';
 import { nanoid } from 'nanoid';
 import multer, { diskStorage } from 'multer';
 import { extension } from 'mime-types';

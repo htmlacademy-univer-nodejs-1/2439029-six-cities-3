@@ -4,8 +4,8 @@ import { Component } from '../shared/types/index.js';
 import { Logger, PinoLogger } from '../shared/libs/logger/index.js';
 import { Config, RestConfig, RestSchema } from '../shared/libs/config/index.js';
 import { DatabaseClient, MongoDatabaseClient } from '../shared/libs/database-client/index.js';
-import {ExceptionFilter} from "../shared/libs/http/index.js";
-import AppExceptionFilter from "../shared/libs/http/app-exeption-filter.js";
+import {ExceptionFilter} from '../shared/libs/http/index.js';
+import AppExceptionFilter from '../shared/libs/http/app-exeption-filter.js';
 
 export function createRestApplicationContainer() {
   const restApplicationContainer = new Container();

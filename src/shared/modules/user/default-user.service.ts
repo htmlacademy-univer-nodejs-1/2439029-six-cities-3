@@ -5,9 +5,9 @@ import { CreateUserDto } from './dto/create-user.dto.js';
 import { inject, injectable } from 'inversify';
 import {Component, DEFAULT_AVATAR_FILE_NAME} from '../../types/index.js';
 import { Logger } from '../../libs/logger/index.js';
-import {OfferEntity} from "../offer/index.js";
-import {UpdateUserDto} from "./dto/update-user.dto.js";
-import {LoginUserDto} from "./dto/login-user.dto.js";
+import {OfferEntity} from '../offer/index.js';
+import {UpdateUserDto} from './dto/update-user.dto.js';
+import {LoginUserDto} from './dto/login-user.dto.js';
 
 @injectable()
 export class DefaultUserService implements UserService {

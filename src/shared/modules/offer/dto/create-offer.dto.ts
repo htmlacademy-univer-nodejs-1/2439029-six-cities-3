@@ -52,5 +52,5 @@ export class CreateOfferDto {
   public userId!: string;
 
   @IsObject({message: 'There should be object CoordinatesType'})
-  coordinates!: Coordinates;
+    coordinates!: Coordinates;
 }

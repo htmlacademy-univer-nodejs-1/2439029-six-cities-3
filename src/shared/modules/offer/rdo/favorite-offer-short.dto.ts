@@ -1,39 +1,39 @@
 import { Expose } from 'class-transformer';
-import {City, Housing} from "../../../types/index.js";
+import {City, Housing} from '../../../types/index.js';
 
 export class FavoriteOfferShortDto {
   @Expose()
   public id!: string;
 
   @Expose()
-  name!: string;
+    name!: string;
 
   @Expose({ name: 'createdAt'})
-  date!: Date;
+    date!: Date;
 
   @Expose()
-  description!: string;
+    description!: string;
 
   @Expose()
-  city!: City;
+    city!: City;
 
   @Expose()
-  previewImg!: string;
+    previewImg!: string;
 
   @Expose()
-  isPremium!: boolean;
+    isPremium!: boolean;
 
   isFavourite = true;
 
   @Expose()
-  rating!: number;
+    rating!: number;
 
   @Expose()
-  housing!: Housing;
+    housing!: Housing;
 
   @Expose()
-  price!: number;
+    price!: number;
 
   @Expose()
-  countComments!: number;
+    countComments!: number;
 }

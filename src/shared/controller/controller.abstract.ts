@@ -1,10 +1,10 @@
-import {RouteInterface, STATIC_RESOURCE_FIELDS} from "../types/index.js";
-import {getFullServerPath, transformObject} from "../helpers/index.js";
+import {RouteInterface, STATIC_RESOURCE_FIELDS} from '../types/index.js';
+import {getFullServerPath, transformObject} from '../helpers/index.js';
 import {injectable} from 'inversify';
 import {Response, Router} from 'express';
 import {StatusCodes} from 'http-status-codes';
-import {Config, RestSchema} from "../libs/config/index.js";
-import {Logger} from "../libs/logger/index.js";
+import {Config, RestSchema} from '../libs/config/index.js';
+import {Logger} from '../libs/logger/index.js';
 import {ControllerInterface} from './controller.interface.js';
 import asyncHandler from 'express-async-handler';
 

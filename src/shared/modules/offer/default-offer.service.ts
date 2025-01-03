@@ -4,8 +4,8 @@ import {OfferEntity} from './offer.entity.js';
 import {OfferService} from './offer-service.interface.js';
 import { Logger } from '../../libs/logger/index.js';
 import {Component, SortType} from '../../types/index.js';
-import {UpdateOfferDto} from "./dto/update-offer.dto.js";
-import {CreateOfferDto} from "./dto/create-offer.dto.js";
+import {UpdateOfferDto} from './dto/update-offer.dto.js';
+import {CreateOfferDto} from './dto/create-offer.dto.js';
 
 const MAX_PREMIUM_OFFERS_COUNT = 3;
 const MAX_OFFERS_COUNT = 60;
@@ -54,8 +54,8 @@ export class DefaultOfferService implements OfferService {
   incComment(offerId: string): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndUpdate(offerId, {'$inc': {
-          countComments: 1,
-        }}).exec();
+        countComments: 1,
+      }}).exec();
 
   }
 

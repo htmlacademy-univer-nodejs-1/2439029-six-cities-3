@@ -2,27 +2,27 @@ import 'reflect-metadata';
 import { Request, Response } from 'express';
 import { inject, injectable } from 'inversify';
 import {StatusCodes} from 'http-status-codes';
-import {Controller} from "../../controller/index.js";
-import {Component, HttpMethod, ParamsCity, ParamsOffer, ParamsOffersCount} from "../../types/index.js";
-import {Logger} from "../../libs/logger/index.js";
-import {Config, RestSchema} from "../../libs/config/index.js";
-import {CommentService} from "../comments/index.js";
-import {UserService} from "../user/user-service.interface.js";
-import {OfferService} from "./offer-service.interface.js";
+import {Controller} from '../../controller/index.js';
+import {Component, HttpMethod, ParamsCity, ParamsOffer, ParamsOffersCount} from '../../types/index.js';
+import {Logger} from '../../libs/logger/index.js';
+import {Config, RestSchema} from '../../libs/config/index.js';
+import {CommentService} from '../comments/index.js';
+import {UserService} from '../user/user-service.interface.js';
+import {OfferService} from './offer-service.interface.js';
 import {
   DocumentExistsMiddleware,
   PrivateRouteMiddleware, UploadFileMiddleware,
   ValidateDtoMiddleware,
   ValidateObjectIdMiddleware
-} from "../../libs/middleware/index.js";
-import {UpdateOfferDto} from "./dto/update-offer.dto.js";
-import {fillDTO} from "../../helpers/index.js";
-import {OfferShortRdo} from "./rdo/offer-short-rdo.js";
-import {HttpError, RequestBody, RequestParams} from "../../libs/http/index.js";
-import {OfferRdo} from "./rdo/offer.rdo.js";
-import {UploadImageResponse} from "./rdo/upload-image.response.js";
-import {FavoriteOfferShortDto} from "./rdo/favorite-offer-short.dto.js";
-import {CreateOfferDto} from "./dto/create-offer.dto.js";
+} from '../../libs/middleware/index.js';
+import {UpdateOfferDto} from './dto/update-offer.dto.js';
+import {fillDTO} from '../../helpers/index.js';
+import {OfferShortRdo} from './rdo/offer-short-rdo.js';
+import {HttpError, RequestBody, RequestParams} from '../../libs/http/index.js';
+import {OfferRdo} from './rdo/offer.rdo.js';
+import {UploadImageResponse} from './rdo/upload-image.response.js';
+import {FavoriteOfferShortDto} from './rdo/favorite-offer-short.dto.js';
+import {CreateOfferDto} from './dto/create-offer.dto.js';
 
 @injectable()
 export class OfferController extends Controller {

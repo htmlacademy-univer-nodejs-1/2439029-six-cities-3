@@ -1,4 +1,4 @@
-import {City, Facility, Housing, Offer, UserTypeEnum} from "../types/index.js";
+import {City, Facility, Housing, Offer, UserTypeEnum} from '../types/index.js';
 
 export function createOffer(offer: string): Offer {
   const offerRow = offer.replace('\n', '').split('\t');

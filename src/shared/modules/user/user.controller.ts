@@ -1,26 +1,26 @@
 import {inject, injectable} from 'inversify';
 import {Request, Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
-import {Controller} from "../../controller/index.js";
-import {Component, HttpMethod, JWT_ALGORITHM} from "../../types/index.js";
-import {Logger} from "../../libs/logger/index.js";
-import {UserService} from "./user-service.interface.js";
-import {Config, RestSchema} from "../../libs/config/index.js";
+import {Controller} from '../../controller/index.js';
+import {Component, HttpMethod, JWT_ALGORITHM} from '../../types/index.js';
+import {Logger} from '../../libs/logger/index.js';
+import {UserService} from './user-service.interface.js';
+import {Config, RestSchema} from '../../libs/config/index.js';
 import {
   BLACK_LIST_TOKENS,
   PrivateRouteMiddleware, UploadFileMiddleware,
   ValidateDtoMiddleware,
   ValidateObjectIdMiddleware
-} from "../../libs/middleware/index.js";
-import {CreateUserDto} from "./dto/create-user.dto.js";
-import {LoginUserDto} from "./dto/login-user.dto.js";
-import {CreateUserRequest} from "./type/create-user-request.js";
-import {HttpError} from "../../libs/http/index.js";
-import {UserRdo} from "./rdo/user.rdo.js";
-import {createJWT, fillDTO} from "../../helpers/index.js";
-import {LoginUserRequest} from "./type/login-user-request.js";
-import {LoggedUserRdo} from "./rdo/logged-user.rdo.js";
-import {UploadUserAvatarResponse} from "./rdo/upload-user-avatar.response.js";
+} from '../../libs/middleware/index.js';
+import {CreateUserDto} from './dto/create-user.dto.js';
+import {LoginUserDto} from './dto/login-user.dto.js';
+import {CreateUserRequest} from './type/create-user-request.js';
+import {HttpError} from '../../libs/http/index.js';
+import {UserRdo} from './rdo/user.rdo.js';
+import {createJWT, fillDTO} from '../../helpers/index.js';
+import {LoginUserRequest} from './type/login-user-request.js';
+import {LoggedUserRdo} from './rdo/logged-user.rdo.js';
+import {UploadUserAvatarResponse} from './rdo/upload-user-avatar.response.js';
 
 @injectable()
 export default class UserController extends Controller {

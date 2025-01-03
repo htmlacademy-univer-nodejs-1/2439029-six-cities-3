@@ -1,7 +1,7 @@
 import * as crypto from 'node:crypto';
 import {ClassConstructor, plainToInstance} from 'class-transformer';
 import * as jose from 'jose';
-import {DEFAULT_STATIC_IMAGES} from "../types/index.js";
+import {DEFAULT_STATIC_IMAGES} from '../types/index.js';
 
 export function generateRandomValue(min: number, max: number, numAfterDigit = 0) {
   return +((Math.random() * (max - min)) + min).toFixed(numAfterDigit);

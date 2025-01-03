@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import { jwtVerify } from 'jose';
 import { StatusCodes } from 'http-status-codes';
 import { createSecretKey } from 'node:crypto';
-import {HttpError} from "../http/index.js";
-import {Middleware} from "./middleware.interface.js";
+import {HttpError} from '../http/index.js';
+import {Middleware} from './middleware.interface.js';
 
 export const BLACK_LIST_TOKENS: Set<string> = new Set();
 export class AuthenticateMiddleware implements Middleware {

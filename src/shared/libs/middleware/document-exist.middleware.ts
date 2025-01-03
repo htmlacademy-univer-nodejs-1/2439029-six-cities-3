@@ -1,8 +1,8 @@
-import {Middleware} from "./middleware.interface.js";
-import {DocumentExistsInterface} from "../../types/index.js";
+import {Middleware} from './middleware.interface.js';
+import {DocumentExistsInterface} from '../../types/index.js';
 import { StatusCodes } from 'http-status-codes';
 import { NextFunction, Request, Response } from 'express';
-import {HttpError} from "../http/index.js";
+import {HttpError} from '../http/index.js';
 
 export class DocumentExistsMiddleware implements Middleware {
   constructor(
