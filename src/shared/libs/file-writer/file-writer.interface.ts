@@ -1,3 +1,4 @@
 export interface FileWriter {
-    write(row: string): void;
+  readonly filename: string;
+  write(row: string): void;
 }

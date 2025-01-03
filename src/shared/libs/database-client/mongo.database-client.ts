@@ -1,4 +1,4 @@
-import * as Mongoose from 'mongoose';
+import mongoose, {Mongoose} from 'mongoose';
 import { inject, injectable } from 'inversify';
 import { DatabaseClient } from './database-client.interface.js';
 import { Component } from '../../types/index.js';
@@ -10,7 +10,7 @@ const RETRY_TIMEOUT = 1000;
 
 @injectable()
 export class MongoDatabaseClient implements DatabaseClient {
-  private mongoose: typeof Mongoose;
+  private mongoose: Mongoose | null = null;
   private isConnected: boolean;
 
   constructor(
@@ -23,37 +23,51 @@ export class MongoDatabaseClient implements DatabaseClient {
     return this.isConnected;
   }
 
-  public async connect(uri: string): Promise<void> {
-    if (this.isConnectedToDatabase()) {
-      throw new Error('MongoDB client already connected');
-    }
-    this.logger.info(uri)
-    this.logger.info('Trying to connect to MongoDB…');
-
+  private async _connectWithRetry(uri: string): Promise<Mongoose> {
     let attempt = 0;
+
     while (attempt < RETRY_COUNT) {
+      console.log('uri', uri)
       try {
-        this.mongoose = await Mongoose.connect(uri);
-        this.isConnected = true;
-        this.logger.info('Database connection established.');
-        return;
+        return await mongoose.connect(uri);
       } catch (error) {
         attempt++;
-        this.logger.error(`Failed to connect to the database. Attempt ${attempt}`, error as Error);
+        this.logger.error(`Failed to connect to the database. Attempt ${attempt}`);
         await setTimeout(RETRY_TIMEOUT);
       }
     }
 
-    throw new Error(`Unable to establish database connection after ${RETRY_COUNT}`);
+    this.logger.error(`The connection to the database could not be established. Error: ${attempt}`);
+    throw new Error('Error connecting to the database');
+  }
+
+  private async _connect(uri: string): Promise<void> {
+    this.mongoose = await this._connectWithRetry(uri);
+    this.isConnected = true;
+  }
+
+  public async connect(uri: string): Promise<void> {
+    if (this.isConnected) {
+      throw new Error('The MongoDB client has already initialized');
+    }
+
+    this.logger.info('Trying to connect to MongoDB');
+    await this._connect(uri);
+    this.logger.info('Connection to MongoDB is established');
+  }
+
+  private async _disconnect(): Promise<void> {
+    await this.mongoose?.disconnect();
+    this.isConnected = false;
+    this.mongoose = null;
   }
 
   public async disconnect(): Promise<void> {
-    if (!this.isConnectedToDatabase()) {
+    if (!this.isConnected) {
       throw new Error('Not connected to the database');
     }
 
-    await this.mongoose.disconnect?.();
-    this.isConnected = false;
+    await this._disconnect();
     this.logger.info('Database connection closed.');
   }
 }

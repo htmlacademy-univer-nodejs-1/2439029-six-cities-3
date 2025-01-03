@@ -1,22 +1,16 @@
 import {Command} from './commands/command.interface.js';
 import {CommandParser} from './command-parser.js';
 
-type CommandCollection = Record<string, Command>;
-
 export class CLIApplication {
-    private commands: CommandCollection = {};
-
-    constructor(
-        private readonly defaultCommand: string = '--help'
-    ) {
-    }
+    private commands: { [propertyName: string]: Command } = {};
+    private defaultCommand = '--help';
 
     public registerCommands(commandList: Command[]): void {
         commandList.forEach((command) => {
-            if (Object.hasOwn(this.commands, command.getName())) {
-                throw new Error(`Command ${command.getName()} is already registered`);
+            if (Object.hasOwn(this.commands, command.name)) {
+                throw new Error(`Command ${command.name} is already registered`);
             }
-            this.commands[command.getName()] = command;
+            this.commands[command.name] = command;
         });
     }
 

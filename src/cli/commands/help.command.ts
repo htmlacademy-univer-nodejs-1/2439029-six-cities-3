@@ -2,11 +2,9 @@ import chalk from 'chalk';
 import {Command} from './command.interface.js';
 
 export class HelpCommand implements Command {
-    public getName(): string {
-        return '--help';
-    }
+    public readonly name = '--help';
 
-    public async execute(..._parameters: string[]): Promise<void> {
+    public async execute(): Promise<void> {
         console.info(`Программа для подготовки данных для REST API сервера.
 Пример: cli.js --<command> [--arguments]
 По факту:  npm run ts ./src/main.cli.ts -- <command> [--arguments]\n`,

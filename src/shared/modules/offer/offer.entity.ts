@@ -1,99 +1,117 @@
-import typegoose, {defaultClasses, getModelForClass, Ref} from '@typegoose/typegoose';
-import {City} from '../../types/index.js';
-import {Housing} from '../../types/index.js';
-import {UserEntity} from '../user/index.js';
-import {User} from '../../types/index.js';
-import {Coordinates} from '../../types/index.js';
-import {FacilitiesEntity} from "../facilities/index.js";
+import typegoose, { defaultClasses, getModelForClass, mongoose, Ref, Severity } from '@typegoose/typegoose';
+import { UserEntity } from '../user/index.js';
+import {City, Coordinates, Facility, Housing} from "../../types/index.js";
 
 const {prop, modelOptions} = typegoose;
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export interface OfferEntity extends defaultClasses.Base {}
+export interface OfferEntity extends defaultClasses.Base {
+}
 
 @modelOptions({
   schemaOptions: {
     collection: 'offers'
   }
 })
-// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({
-    trim: true,
+    type: () => String,
     required: true,
-    minlength: [10, 'Min length for name is 10'],
-    maxlength: [100, 'Min length for name is 100']
+    enum: City
   })
-  public name!: string;
-
-  @prop({
-    trim: true,
-    required: true,
-    minlength: [20, 'Min length for description is 20'],
-    maxlength: [1024, 'Min length for description is 1024']
-  })
-  public description!: string;
-
-  @prop({required: true})
-  public date!: Date;
-
-  @prop({required: true, type: () => String, enum: City})
   public city!: City;
 
-  @prop({required: true})
-  public previewImg!: string;
+  @prop({type: () => Number, default: 0})
+  public countComments!: number;
 
   @prop({
+    type: () => Number,
     required: true,
-    type: () => String,
-    default: []
-  })
-  public images!: string[];
-
-  @prop({required: true})
-  public isPremium!: boolean;
-
-  @prop({required: true})
-  public isFavourites!: boolean;
-
-  @prop({required: true})
-  public rating!: 1 | 1.1 | 1.2 | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | 1.9 |
-    2 | 2.1 | 2.2 | 2.3 | 2.4 | 2.5 | 2.6 | 2.7 | 2.8 | 2.9 |
-    3 | 3.1 | 3.2 | 3.3 | 3.4 | 3.5 | 3.6 | 3.7 | 3.8 | 3.9 |
-    4 | 4.1 | 4.2 | 4.3 | 4.4 | 4.5 | 4.6 | 4.7 | 4.8 | 4.9 |
-    5;
-
-  @prop({required: true, type: () => String, enum: Housing})
-  public housing!: Housing;
-
-  @prop({required: true})
-  public countRooms!: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
-  @prop({required: true})
-  public countPeople!: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-
-  @prop({
-    required: true,
-    min: [100, 'Min length for price is 100'],
-    max: [100000, 'Min length for price is 100000'],
+    min: [500, 'Min cost is 500'],
+    max: [2000, 'Max cost is 2000']
   })
   public price!: number;
 
   @prop({
-    ref: FacilitiesEntity,
+    type: () => String,
     required: true,
-    default: [],
-    _id: false
+    trim: true,
+    minlength: [20, 'Min length for description is 20'],
+    maxlength: [1024, 'Max length for description is 1024']
   })
-  public facilities!: Ref<FacilitiesEntity>[];
+  public description!: string;
 
-  @prop({required: true, ref: UserEntity})
-  public author!: User;
+  @prop({
+    type: () => String,
+    required: true,
+    enum: Facility
+  })
+  public facilities!: Facility[];
 
-  @prop({default: 0})
-  public countComments!: number;
+  @prop({
+    type: () => Number,
+    required: true, min: [1, 'Min count of guests is 1'],
+    max: [10, 'Max count of guests is 10']
+  })
+  public countPeople!: number;
 
-  @prop({required: true, type: () => String,})
+  @prop({
+    type: () => String,
+    required: true,
+    enum: Housing
+  })
+  public housing!: Housing;
+
+  @prop({
+    type: () => [String],
+    minCount: [6, 'Images should be 6'],
+    maxCount: [6, 'Images should be 6']
+  })
+  public images!: string[];
+
+  @prop({
+    type: () => String,
+    required: true,
+    trim: true,
+    minlength: [10, 'Min length for name is 10'],
+    maxlength: [100, 'Max length for name is 15']
+  })
+  public name!: string;
+
+  @prop({
+    ref: UserEntity,
+    required: true
+  })
+  public userId!: Ref<UserEntity>;
+
+  @prop({type: () => Boolean, required: true, default: false})
+  public isPremium!: boolean;
+
+  @prop({type: () => String, default: ''})
+  public previewImg!: string;
+
+  @prop({type: () => Date})
+  public date!: Date;
+
+  @prop({
+    type: () => Number,
+    default: 1,
+    min: [1, 'Min rating is 1'],
+    max: [5, 'Max rating is 5']
+  })
+  public rating!: number;
+
+  @prop({
+    type: () => Number,
+    required: true, min: [1, 'Min room count is 1'],
+    max: [8, 'Max room count is 8']
+  })
+  public countRooms!: number;
+
+  @prop({
+    type: () => mongoose.Schema.Types.Mixed,
+    required: true,
+    allowMixed: Severity.ALLOW
+  })
   public coordinates!: Coordinates;
 }
 

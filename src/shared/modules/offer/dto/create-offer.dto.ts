@@ -1,27 +1,56 @@
-import {User} from '../../../types/index.js';
+import {Coordinates, Facility} from '../../../types/index.js';
 import {Housing} from '../../../types/index.js';
 import {City} from '../../../types/index.js';
+import {
+  ArrayNotEmpty,
+  IsArray,
+  IsBoolean,
+  IsEnum,
+  IsObject,
+  Max,
+  MaxLength,
+  Min,
+  MinLength
+} from 'class-validator';
 
-export default class CreateOfferDto {
-  name!: string;
-  description!: string;
-  date!: Date;
-  city!: City;
-  previewImg!: string;
-  images!: string[];
-  isPremium!: boolean;
-  isFavourites!: boolean;
-  rating!:  1 | 1.1 | 1.2 | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | 1.9 |
-    2 | 2.1 | 2.2 | 2.3 | 2.4 | 2.5 | 2.6 | 2.7 | 2.8 | 2.9 |
-    3 | 3.1 | 3.2 | 3.3 | 3.4 | 3.5 | 3.6 | 3.7 | 3.8 | 3.9 |
-    4 | 4.1 | 4.2 | 4.3 | 4.4 | 4.5 | 4.6 | 4.7 | 4.8 | 4.9 |
-    5;
-  housing!: Housing;
-  countRooms!: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-  countPeople!: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-  price!: number;
-  facilities: string[];
-  author!: User;
-  countComments!: number;
-  coordinates!: string;
+export class CreateOfferDto {
+  @MinLength(10, {message: 'Min length for name is 10'})
+  @MaxLength(100, {message: 'Max length for name is 100'})
+  public name!: string;
+
+  @MinLength(20, {message: 'Min length for description is 20'})
+  @MaxLength(1024, {message: 'Max length for description is 1024'})
+  public description!: string;
+
+  @IsEnum(City, {message: 'type must be one of the city'})
+  public city!: City;
+
+  @IsBoolean({message: 'isPremium premium must be boolean'})
+  public isPremium!: boolean;
+
+  @IsEnum(Housing, {message: 'type must be one of the housing types'})
+  public housing!: Housing;
+
+  @Min(1, {message: 'Min count of rooms is 1'})
+  @Max(8, {message: 'Max count of rooms is 8'})
+  public countRooms!: number;
+
+  @Min(1, {message: 'Min count of people is 1'})
+  @Max(10, {message: 'Max count of people is 10'})
+  public countPeople!: number;
+
+  @Min(500, {message: 'Min price is 500'})
+  @Max(2000, {message: 'Max price is 2000'})
+  public price!: number;
+
+  @IsArray({message: 'field facilities must be an array'})
+  @IsEnum(Facility, {each: true, message: 'type must be one of the facilities'})
+  @ArrayNotEmpty({message: 'There should be at least 1 facility'})
+  public facilities: Facility[];
+
+
+  public userId!: string;
+
+  @IsObject({message: 'There should be object CoordinatesType'})
+  coordinates!: Coordinates;
 }
